@@ -1,0 +1,44 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# ---------- Virtual Environments ----------
+.venv/
+venv/
+env/
+.venv_local/
+
+# ---------- Environment Variables ----------
+.env
+.env.*
+!.env.example
+
+# ---------- Logs ----------
+*.log
+logs/
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+
+# ---------- IDE / Editor ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+
+# ---------- Prefect ----------
+.prefect/
+
+# ---------- Database / Local ----------
+*.sqlite3

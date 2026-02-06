@@ -1,0 +1,5 @@
+imdb_id,title,year,genre,director,actors,imdb_rating,imdb_votes,box_office,country,language
+tt3896198,Guardians of the Galaxy Vol. 2,2017,"Action, Adventure, Comedy",James Gunn,"Chris Pratt, Zoe Saldaña, Dave Bautista",7.6,"816,421","$389,813,101",United States,English
+tt1375666,Inception,2010,"Action, Adventure, Sci-Fi",Christopher Nolan,"Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",8.8,"2,767,518","$292,587,330","United States, United Kingdom","English, Japanese, French"
+tt0111161,The Shawshank Redemption,1994,Drama,Frank Darabont,"Tim Robbins, Morgan Freeman, Bob Gunton",9.3,"3,136,948","$28,767,189",United States,English
+tt0468569,The Dark Knight,2008,"Action, Crime, Drama",Christopher Nolan,"Christian Bale, Heath Ledger, Aaron Eckhart",9.1,"3,115,102","$534,987,076","United States, United Kingdom","English, Mandarin"

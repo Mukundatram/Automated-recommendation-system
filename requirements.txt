@@ -1,0 +1,12 @@
+# For embeddings (later)
+sentence-transformers
+torch
+
+# For UI (later)
+streamlit
+
+# For scheduling via cron-like rules
+apscheduler
+# For data manipulation
+pandas
+numpy
