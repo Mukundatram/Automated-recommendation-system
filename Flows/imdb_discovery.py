@@ -45,30 +45,42 @@ def fetch_existing_and_pending_ids() -> set[str]:
 @task(log_prints=True)
 def discover_new_imdb_ids(limit: int = 25) -> list[str]:
     ids: list[str] = []
+    page = 1
 
-    search_url = f"http://www.omdbapi.com/?s=movie&type=movie&apikey={API_KEY}"
-    response = httpx.get(search_url, timeout=10)
-    response.raise_for_status()
+    while len(ids) < limit:
+        keyword = KEYWORDS[(page - 1) % len(KEYWORDS)]
 
-    data = response.json()
-    if data.get("Response") == "False":
-        print("OMDb search returned no results")
-        return []
+        search_url = (
+            f"http://www.omdbapi.com/"
+            f"?s={keyword}&type=movie&page={page}&apikey={API_KEY}"
+        )
 
-    for movie in data.get("Search", [])[:limit]:
-        imdb_id = movie.get("imdbID")
+        response = httpx.get(search_url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
 
-        detail_url = f"http://www.omdbapi.com/?i={imdb_id}&apikey={API_KEY}"
-        detail = httpx.get(detail_url, timeout=10).json()
+        if data.get("Response") == "False":
+            print(f"No more results for keyword='{keyword}', page={page}")
+            break
 
-        raw_rating = detail.get("imdbRating")
-        rating = float(raw_rating) if raw_rating not in (None, "N/A") else 0.0
+        for movie in data.get("Search", []):
+            imdb_id = movie.get("imdbID")
 
-        # optional quality filter
-        if rating >= 7.0:
-            ids.append(imdb_id)
+            detail_url = f"http://www.omdbapi.com/?i={imdb_id}&apikey={API_KEY}"
+            detail = httpx.get(detail_url, timeout=10).json()
 
-    print(f"Discovered {len(ids)} new IMDb IDs after filtering")
+            raw_rating = detail.get("imdbRating")
+            rating = float(raw_rating) if raw_rating not in (None, "N/A") else 0.0
+
+            if rating >= 7.0:
+                ids.append(imdb_id)
+
+            if len(ids) >= limit:
+                break
+
+        page += 1
+
+    print(f"Discovered {len(ids)} IMDb IDs after filtering")
     return ids
 
 
